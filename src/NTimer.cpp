@@ -40,6 +40,8 @@ bool NTimerClass::changeTimer(evt &event)
     uint8_t index = search(event.id);
     if (index < timers)
     {
+        if (events[index].enable)
+            event.enable = true;
         events[index] = event;
     }
     return false;
