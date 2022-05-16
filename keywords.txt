@@ -2,6 +2,7 @@ NTimer          	LITERAL1
 
 hz              	LITERAL1
 s               	LITERAL1
+m               	LITERAL1
 
 Event           	LITERAL1
 ElapsedEvent    	LITERAL1
@@ -9,10 +10,12 @@ evt             	LITERAL1
 
 interval			KEYWORD2
 
+NTimerClass			KEYWORD1
 runtime				KEYWORD2
 addEvent			KEYWORD2
 changeEvent			KEYWORD2
 removeEvent			KEYWORD2
 start				KEYWORD2
+startCall			KEYWORD2
 stop				KEYWORD2
 update				KEYWORD2
