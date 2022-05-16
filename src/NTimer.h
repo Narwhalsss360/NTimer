@@ -11,12 +11,15 @@
 #include "Events.h"
 #include "TimeLiterals.h"
 
+bool interval(uint32_t &, uint32_t);
+
 class NTimerClass
 {
 private:
     uint8_t timers;
     pEvt events;
     uint8_t search(uint8_t);
+
 public:
     uint32_t runtime;
     NTimerClass();

@@ -1,5 +1,18 @@
 #include "NTimer.h"
 
+bool interval(uint32_t &lastRun, uint32_t interval)
+{
+    if (NTimer.runtime - lastRun >= interval)
+    {
+        lastRun = NTimer.runtime;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 NTimerClass::NTimerClass()
     : timers(NULL), events(NULL), runtime(millis())
 {
@@ -69,7 +82,7 @@ uint8_t NTimerClass::search(uint8_t id)
 {
     for (uint8_t i = ZERO; i < timers; i++)
     {
-        if(events[i].id == id)
+        if (events[i].id == id)
             return i;
     }
     return timers;
@@ -82,9 +95,8 @@ void NTimerClass::update()
     {
         if (events[i].enable)
         {
-            if (runtime - events[i].lastCallback >= events[i].time)
+            if (interval(events[i].lastCallback, events[i].time))
             {
-                events[i].lastCallback = runtime;
                 events[i].callback({events[i].id, runtime});
             }
         }
