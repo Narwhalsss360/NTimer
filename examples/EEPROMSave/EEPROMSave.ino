@@ -13,6 +13,14 @@ Event sensorEvent;
 
 int memCounter = 0;
 
+void clearEEPROM(byte fill) //Clears memory, fills memory with {fill} parameter.
+{
+    for (int i = 0; i < EEPROM.length(); i++)
+    {
+        EEPROM.update(i, fill);
+    }
+}
+
 void printValues()
 {
     for (int i = 0; i < EEPROM.length(); i++)
@@ -45,6 +53,7 @@ void setup()
     if (Serial) //Execute block if Serial is connected at startup. Press reset button while connected.
     {
         printValues(); //Print values on EEPROM.
+        clearEEPROM(0xff); //Clear after person checks.
         while (1) //Dont continue.
         {
         }
