@@ -30,4 +30,6 @@ struct Event
 
 typedef Event evt;
 typedef evt *pEvt;
+typedef evt &rEvt;
+
 #endif
