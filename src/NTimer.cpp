@@ -102,6 +102,14 @@ void NTimerClass::update()
             if (interval(events[i].lastCallback, events[i].time))
             {
                 events[i].callback({runtime, &events[i]});
+                switch (events[i].mode)
+                {
+                case ONCE:
+                    events[i].enable = false;
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ bool led1State = false; //LED 1 state.
 
 int led1Interval = 500; //Interval to change LED 1 state.
 int led1EventID = 0; //Uniqe event ID for LED 1's event.
+int led1Mode = PERIODIC; //LED 1's mode, event occurs every interval.
 Event led1Event; //Event object for LED 1, set later.
 
 int led2Pin = 10; //LED 2 pin.
@@ -14,6 +15,7 @@ bool led2State = false; //LED 2 state.
 
 int led2Interval = 1s; //Interval to change LED 2 state. Using hz returns time in milliseconds.
 int led2EventID = 1; //Uniqe event ID for LED 2's event.
+int led2Mode = PERIODIC; //LED 2's mode, event occurs only once after timer is started.
 Event led2Event; //Event object for LED 2, set later.
 
 int sensorPin = A1; //Fictonal sensor, or real if you want to use one.
@@ -21,6 +23,7 @@ int sensorReading = 0; //Sensor reading.
 
 int sensorPollingInterval = 20hz; //Interval to get the sensor reading. Usage of hz returns time in ms.
 int sensorEventID = 2; //Uniqe event ID for the sensor's event.
+int sensorMode = PERIODIC; //sensor's mode, event occurs every interval.
 Event sensorEvent; //Event object for the sensor, set later.
 
 unsigned long time = 0; //Your object that saves from {millis()} through {NTimer.runtime}.
@@ -51,9 +54,9 @@ void setup()
     pinMode(led1Pin, OUTPUT); //Set LED 1's pin to output.
     pinMode(led2Pin, OUTPUT); //Set LED 1's pin to output.
 
-    led1Event = Event(led1EventID, led1Interval, led1IntervalCallback); //Setting LED 1's event to a new event that has the ID of {led1EventID}, interval of {led1Interval} and the callback of {led1IntervalCallback}.
-    led2Event = Event(led2EventID, led2Interval, led2IntervalCallback); //Setting LED 2's event to a new event that has the ID of {led2EventID}, interval of {led2Interval} and the callback of {led2IntervalCallback}.
-    sensorEvent = Event(sensorEventID, sensorPollingInterval, sensorReadCallback); //Setting the sensors event to a new event that has the ID of {sensorEventID}, interval of {sensorPollingInterval} and the callback of {sensorReadCallback}.
+    led1Event = Event(led1EventID, led1Mode,led1Interval, led1IntervalCallback); //Setting LED 1's event to a new event that has the ID of {led1EventID}, {led1Mode} mode, interval of {led1Interval} and the callback of {led1IntervalCallback}.
+    led2Event = Event(led2EventID, led2Mode,led2Interval, led2IntervalCallback); //Setting LED 2's event to a new event that has the ID of {led2EventID}, {led2Mode} mode, interval of {led2Interval} and the callback of {led2IntervalCallback}.
+    sensorEvent = Event(sensorEventID, sensorMode,sensorPollingInterval, sensorReadCallback); //Setting the sensors event to a new event that has the ID of {sensorEventID}, {sensorMode} mode, ,interval of {sensorPollingInterval} and the callback of {sensorReadCallback}.
 
     NTimer.addEvent(led1Event); //Registering the event.
     NTimer.addEvent(led2Event); //Registering the event.
