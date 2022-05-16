@@ -91,6 +91,8 @@ uint8_t NTimerClass::search(uint8_t id)
 void NTimerClass::update()
 {
     runtime = millis();
+    if (!timers)
+        return;
     for (uint8_t i = ZERO; i < timers; i++)
     {
         if (events[i].enable)
