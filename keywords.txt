@@ -10,11 +10,9 @@ evt             	LITERAL1
 interval			KEYWORD2
 
 runtime				KEYWORD2
-newTimer			KEYWORD2
-changeTimer			KEYWORD2
-removeTimer			KEYWORD2
+addEvent			KEYWORD2
+changeEvent			KEYWORD2
+removeEvent			KEYWORD2
 start				KEYWORD2
-start				KEYWORD2
-stop				KEYWORD2
 stop				KEYWORD2
 update				KEYWORD2
