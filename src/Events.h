@@ -11,10 +11,12 @@
 
 #define INVALID_EVENT(event) (event.time <= NULL || event.id == NULL) ? true : false
 
+typedef struct Event;
+
 struct ElapsedEvent
 {
-    uint8_t id;
     uint32_t signalTime;
+    Event *pEventSettings;
 };
 
 struct Event
@@ -29,7 +31,7 @@ struct Event
 };
 
 typedef Event evt;
-typedef evt *pEvt;
 typedef evt &rEvt;
+typedef evt *pEvt;
 
 #endif

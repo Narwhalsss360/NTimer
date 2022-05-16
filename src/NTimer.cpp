@@ -99,7 +99,7 @@ void NTimerClass::update()
         {
             if (interval(events[i].lastCallback, events[i].time))
             {
-                events[i].callback({events[i].id, runtime});
+                events[i].callback({runtime, &events[i]});
             }
         }
     }
