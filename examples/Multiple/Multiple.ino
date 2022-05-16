@@ -32,7 +32,10 @@ void led1IntervalCallback(ElapsedEvent eventInfo) //Your function that runs on y
 {
     led1State = !led1State; //Logical Not LED 1's state.
     digitalWrite(led1Pin, led1State); //Write the new state.
-    NTimer.start(led2EventID); //Start LED 2's event, in this case, LED 2 will always blink 500 ms after LED 1.
+    if (led1State)
+    {
+        NTimer.start(led2EventID); //Start LED 2's event, in this case, LED 2 will always change state 500 ms after LED 1 is on except for the first run.
+    }
 }
 
 void led2IntervalCallback(ElapsedEvent eventInfo) //Your function that runs on your set interval. Must have 1 argument of {ElapsedEvent}.
