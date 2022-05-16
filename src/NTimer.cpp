@@ -144,6 +144,19 @@ bool NTimerClass::start(uint8_t id)
     return false;
 }
 
+bool NTimerClass::startCall(uint8_t id)
+{
+    uint8_t index = search(id);
+    if (index < eventsLength)
+    {
+        events[index].enable = true;
+        events[index].callback({runtime, &events[index]});
+        events[index].lastCallback = runtime;
+        return true;
+    }
+    return false;
+}
+
 bool NTimerClass::stop(uint8_t id)
 {
     uint8_t index = search(id);

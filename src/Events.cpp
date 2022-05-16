@@ -5,6 +5,11 @@ ElapsedEvent::ElapsedEvent()
 {
 }
 
+ElapsedEvent::ElapsedEvent(uint32_t _signalTime, Event *_pEventSettings)
+    :signalTime(_signalTime), pEventSettings(_pEventSettings)
+{
+}
+
 Event::Event()
     : time(NULL), callback(NULL), lastCallback(ZERO), enable(false)
 {

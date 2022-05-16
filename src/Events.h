@@ -25,6 +25,7 @@ struct ElapsedEvent
     uint32_t signalTime;
     Event *pEventSettings;
     ElapsedEvent();
+    ElapsedEvent(uint32_t, Event *);
 };
 
 struct Event

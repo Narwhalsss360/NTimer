@@ -28,6 +28,7 @@ public:
     bool removeEvent(uint8_t);
     void start();
     bool start(uint8_t);
+    bool startCall(uint8_t);
     void stop();
     bool stop(uint8_t);
     void update();
