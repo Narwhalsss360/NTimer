@@ -63,6 +63,16 @@ bool NTimerClass::removeTimer(uint8_t id)
     return false;
 }
 
+uint8_t NTimerClass::search(uint8_t id)
+{
+    for (uint8_t i = ZERO; i < timers; i++)
+    {
+        if(events[i].id == id)
+            return i;
+    }
+    return timers;
+}
+
 void NTimerClass::update()
 {
     runtime = millis();
