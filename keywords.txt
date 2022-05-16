@@ -1,15 +1,20 @@
 NTimer          	LITERAL1
+
+hz              	LITERAL1
+s               	LITERAL1
+
 Event           	LITERAL1
 ElapsedEvent    	LITERAL1
 evt             	LITERAL1
-_hz             	LITERAL1
-_s              	LITERAL1
 
-newTimer            KEYWORD2
-changeTimer         KEYWORD2
-removeTimer         KEYWORD2
-start               KEYWORD2
-start               KEYWORD2
-stop                KEYWORD2
-stop                KEYWORD2
-update              KEYWORD2
+interval			KEYWORD2
+
+runtime				KEYWORD2
+newTimer			KEYWORD2
+changeTimer			KEYWORD2
+removeTimer			KEYWORD2
+start				KEYWORD2
+start				KEYWORD2
+stop				KEYWORD2
+stop				KEYWORD2
+update				KEYWORD2
