@@ -35,7 +35,7 @@ bool NTimerClass::newTimer(evt newEvent)
     return true;
 }
 
-bool NTimerClass::changeTimer(evt &event)
+bool NTimerClass::changeTimer(evt event)
 {
     uint8_t index = search(event.id);
     if (index < timers)
