@@ -42,7 +42,7 @@ void setup()
     Serial.begin(baudrate); //Start Serial.
     delay(WAIT_FOR_SERIAL); //Wait a little.
 
-    if (!Serial) //Execute block if Serial is connected at startup. Press reset button while connected.
+    if (Serial) //Execute block if Serial is connected at startup. Press reset button while connected.
     {
         printValues(); //Print values on EEPROM.
         while (1) //Dont continue.
