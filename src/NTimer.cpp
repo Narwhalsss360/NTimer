@@ -10,7 +10,7 @@ NTimerClass::~NTimerClass()
     free(events);
 }
 
-bool NTimerClass::newTimer(evt &newEvent)
+bool NTimerClass::newTimer(evt newEvent)
 {
     uint8_t index = search(newEvent.id);
     if (index < timers)

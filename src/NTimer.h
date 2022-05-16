@@ -20,7 +20,7 @@ private:
 public:
     uint32_t runtime;
     NTimerClass();
-    bool newTimer(evt &);
+    bool newTimer(evt);
     bool changeTimer(evt &);
     bool removeTimer(uint8_t);
     void start();
