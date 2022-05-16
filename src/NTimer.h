@@ -16,16 +16,16 @@ bool interval(uint32_t &, uint32_t);
 class NTimerClass
 {
 private:
-    uint8_t timers;
+    uint8_t eventsLength;
     pEvt events;
     uint8_t search(uint8_t);
 
 public:
     uint32_t runtime;
     NTimerClass();
-    bool newTimer(evt);
-    bool changeTimer(evt);
-    bool removeTimer(uint8_t);
+    bool addEvent(evt);
+    bool changeEvent(evt);
+    bool removeEvent(uint8_t);
     void start();
     bool start(uint8_t);
     void stop();
