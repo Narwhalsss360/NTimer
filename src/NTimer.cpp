@@ -168,4 +168,14 @@ bool NTimerClass::stop(uint8_t id)
     return false;
 }
 
+pEvt NTimerClass::getEventSettings(uint8_t id)
+{
+    uint8_t index = search(id);
+    if (index < eventsLength)
+    {
+        return &events[index];
+    }
+    return NULL;
+}
+
 NTimerClass NTimer = NTimerClass();

@@ -32,6 +32,7 @@ public:
     void stop();
     bool stop(uint8_t);
     void update();
+    pEvt getEventSettings(uint8_t);
     ~NTimerClass();
 };
 
