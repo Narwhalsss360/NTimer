@@ -65,14 +65,16 @@ bool NTimerClass::removeTimer(uint8_t id)
     uint8_t index = search(id);
     if (index < timers)
     {
-        /* pEvt temp = new evt[timers];
+        pEvt temp = new evt[timers];
         memcpy(temp, events, sizeof(evt) * timers);
         delete[] events;
         events = new evt[timers - 1];
-        memcpy(events, temp, sizeof(evt) * index + 1);
-        memcpy(events, temp + index + 1, (sizeof(evt) * (timers - index))); // <- TEST!
+
+        memmove(events, temp, (index + 1)*sizeof(evt));
+        memmove(events + index, temp + (index + 1), ((timers - index)*sizeof(evt)));
+
         delete[] temp;
-        timers--; */
+        timers--;
         return true;
     }
     return false;
