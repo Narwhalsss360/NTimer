@@ -1,5 +1,10 @@
 #include "Events.h"
 
+ElapsedEvent::ElapsedEvent()
+    :signalTime(NULL), pEventSettings(NULL)
+{
+}
+
 Event::Event()
     : time(NULL), callback(NULL), lastCallback(ZERO), enable(false)
 {
