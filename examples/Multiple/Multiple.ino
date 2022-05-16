@@ -5,7 +5,7 @@ int baudrate = 9600; //Serial.begin() baudrate.
 int led1Pin = LED_BUILTIN; //LED 1 pin.
 bool led1State = false; //LED 1 state.
 
-int led1Interval = 500; //Interval to change LED 1 state.
+int led1Interval = 1s; //Interval to change LED 1 state. Usage of s returns time in ms.
 int led1EventID = 0; //Uniqe event ID for LED 1's event.
 int led1Mode = PERIODIC; //LED 1's mode, event occurs every interval.
 Event led1Event; //Event object for LED 1, set later.
@@ -13,9 +13,9 @@ Event led1Event; //Event object for LED 1, set later.
 int led2Pin = 10; //LED 2 pin.
 bool led2State = false; //LED 2 state.
 
-int led2Interval = 1s; //Interval to change LED 2 state. Using hz returns time in milliseconds.
+int led2Interval = 500; //Interval to change LED 2 state.
 int led2EventID = 1; //Uniqe event ID for LED 2's event.
-int led2Mode = PERIODIC; //LED 2's mode, event occurs only once after timer is started.
+int led2Mode = ONCE; //LED 2's mode, event occurs only once after timer is started.
 Event led2Event; //Event object for LED 2, set later.
 
 int sensorPin = A1; //Fictonal sensor, or real if you want to use one.
@@ -32,6 +32,7 @@ void led1IntervalCallback(ElapsedEvent eventInfo) //Your function that runs on y
 {
     led1State = !led1State; //Logical Not LED 1's state.
     digitalWrite(led1Pin, led1State); //Write the new state.
+    NTimer.start(led2EventID); //Start LED 2's event, in this case, LED 2 will always blink 500 ms after LED 1.
 }
 
 void led2IntervalCallback(ElapsedEvent eventInfo) //Your function that runs on your set interval. Must have 1 argument of {ElapsedEvent}.
@@ -46,7 +47,9 @@ void sensorReadCallback(ElapsedEvent eventInfo) //Your function that runs on you
     Serial.print("Sensor Reading at "); //Print.
     Serial.print(eventInfo.signalTime); // {ElapsedEvent.signalTime} returns the time that the sensor was polled.
     Serial.print(", Value: "); //Print.
-    Serial.println(sensorReading); //Print.
+    Serial.print(sensorReading); //Print.
+    Serial.print(", Event ID: "); //Print
+    Serial.println(eventInfo.pEventSettings->id); //{ElapsedEvent} has a pointer to the event settings that called this event.
 }
 
 void setup()
