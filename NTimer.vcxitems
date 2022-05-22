@@ -14,12 +14,13 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
     <Text Include="$(MSBuildThisFileDirectory)src\NTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)NTimer.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\NDefs\src\NDefs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Events.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h" />
   </ItemGroup>

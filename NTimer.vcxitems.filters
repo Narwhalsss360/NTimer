@@ -22,17 +22,20 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
     <Text Include="$(MSBuildThisFileDirectory)src\NTimer.h">
       <Filter>Header Files</Filter>
     </Text>
+    <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Events.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\NDefs\src\NDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
