@@ -35,8 +35,5 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\NDefs\src\NDefs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

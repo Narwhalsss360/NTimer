@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)NTimer.h" /> -->
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\NDefs\src\NDefs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Events.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h" />
   </ItemGroup>
