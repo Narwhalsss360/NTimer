@@ -19,3 +19,7 @@ start				KEYWORD2
 startCall			KEYWORD2
 stop				KEYWORD2
 update				KEYWORD2
+
+PerfTimer			KEYWORD1
+startTime			KEYWORD2
+totalTime			KEYWORD2
