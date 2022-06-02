@@ -10,8 +10,7 @@ evt             	LITERAL1
 
 interval			KEYWORD2
 
-NTimerClass			KEYWORD1
-runtime				KEYWORD1
+runtime          	KEYWORD1
 addEvent			KEYWORD2
 changeEvent			KEYWORD2
 removeEvent			KEYWORD2
