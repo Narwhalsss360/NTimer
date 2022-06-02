@@ -4,7 +4,7 @@ const int ledInterval = 500; //Interval to blink led.
 
 bool state = false; //State of led.
 
-unsigned long lastTimeStateChange = 0; //Last time state was changed.
+unsigned long lastTimeStateChange = 0; //Last time state was changed. Automatically updated in interval function.
 
 void onInterval()
 {
@@ -19,8 +19,6 @@ void setup()
 
 void loop()
 {
-    NTimer.update(); //Update NTimer clocks.
-
     if (interval(lastTimeStateChange, ledInterval)) //Check if its time to blink led.
     {
         onInterval(); //Change the state of the led.
