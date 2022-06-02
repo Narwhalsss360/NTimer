@@ -3,6 +3,8 @@
 
 #define WAIT_FOR_SERIAL 1000
 
+NTimer timer;
+
 int baudrate = 9600;
 
 int sensorPin = A1;
@@ -61,11 +63,10 @@ void setup()
     Serial.end(); //End Serial if not connected at startup.
 
     sensorEvent = Event(sensorEventId, sensorMode, sensorInterval, save); //Set event.
-    NTimer.addEvent(sensorEvent); //Register event.
-    NTimer.startCall(sensorEventId); //Start timer and call at start.
+    timer.addEvent(sensorEvent); //Register event.
+    timer.startCall(sensorEventId); //Start timer and call at start.
 }
 
 void loop()
 {
-    NTimer.update(); //Clocks update.
 }
