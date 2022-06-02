@@ -1,5 +1,7 @@
 #include <NTimer.h> //<- Library to include
 
+NTimer timer; //<- Your timer.
+
 int baudrate = 9600; //Serial.begin() baudrate.
 
 int led1Pin = LED_BUILTIN; //LED 1 pin.
@@ -34,7 +36,7 @@ void led1IntervalCallback(ElapsedEvent eventInfo) //Your function that runs on y
     digitalWrite(led1Pin, led1State); //Write the new state.
     if (led1State)
     {
-        NTimer.start(led2EventID); //Start LED 2's event, in this case, LED 2 will always change state 500 ms after LED 1 is on except for the first run.
+        timer.start(led2EventID); //Start LED 2's event, in this case, LED 2 will always change state 500 ms after LED 1 is on except for the first run.
     }
 }
 
@@ -64,18 +66,17 @@ void setup()
     led2Event = Event(led2EventID, led2Mode,led2Interval, led2IntervalCallback); //Setting LED 2's event to a new event that has the ID of {led2EventID}, {led2Mode} mode, interval of {led2Interval} and the callback of {led2IntervalCallback}.
     sensorEvent = Event(sensorEventID, sensorMode,sensorPollingInterval, sensorReadCallback); //Setting the sensors event to a new event that has the ID of {sensorEventID}, {sensorMode} mode, ,interval of {sensorPollingInterval} and the callback of {sensorReadCallback}.
 
-    NTimer.addEvent(led1Event); //Registering the event.
-    NTimer.addEvent(led2Event); //Registering the event.
-    NTimer.addEvent(sensorEvent); //Registering the event.
+    timer.addEvent(led1Event); //Registering the event.
+    timer.addEvent(led2Event); //Registering the event.
+    timer.addEvent(sensorEvent); //Registering the event.
 
-    NTimer.start(led1EventID); //Starting the event with the given ID, in this case it is the ID of LED 1.
-    NTimer.start(); //Starting all Events.
+    timer.start(led1EventID); //Starting the event with the given ID, in this case it is the ID of LED 1.
+    timer.start(); //Starting all Events.
 
     Serial.begin(baudrate); //Begin Serial.
 }
 
 void loop()
 {
-    NTimer.update(); //Checks which events are to run, also update NTimer.runtime that you can use.
-    time = NTimer.runtime; //Saves {runtime} which is actually just {millis()}.
+    time = runtime; //Saves {runtime} into {time} which is actually just {millis()}. Just use runtime instead of millis() for your millis() needs.
 }
