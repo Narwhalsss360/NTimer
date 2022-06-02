@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx</Extensions>
     </Filter>
+    <Filter Include="Library metdata">
+      <UniqueIdentifier>{1923a6ad-67b2-477d-8eb6-366416e3b489}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\NTimer.cpp">
@@ -22,11 +25,15 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
     <Text Include="$(MSBuildThisFileDirectory)src\NTimer.h">
       <Filter>Header Files</Filter>
     </Text>
-    <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)library.properties">
+      <Filter>Library metdata</Filter>
+    </Text>
+    <Text Include="$(MSBuildThisFileDirectory)keywords.txt">
+      <Filter>Library metdata</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Events.h">
