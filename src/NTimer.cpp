@@ -1,10 +1,14 @@
+#define NTimer_cpp
 #include "NTimer.h"
 
-bool interval(uint32_t &lastRun, uint32_t interval)
+uint32_t runtime;
+static NTimer *instances[MAX_INSTANCES] = { ZERO };
+
+inline bool interval(uint32_t &lastRun, uint32_t interval)
 {
-    if (NTimer.runtime - lastRun >= interval)
+    if (runtime - lastRun >= interval)
     {
-        lastRun = NTimer.runtime;
+        lastRun = runtime;
         return true;
     }
     else
@@ -13,17 +17,32 @@ bool interval(uint32_t &lastRun, uint32_t interval)
     }
 }
 
-NTimerClass::NTimerClass()
-    : eventsLength(NULL), events(NULL), runtime(millis())
+NTimer::NTimer()
+    : eventsLength(NULL), events(NULL)
 {
+    for (uint8_t instance = ZERO; instance < MAX_INSTANCES; instance++)
+    {
+        if (instances[instance] == ZERO)
+        {
+            instances[instance] = this;
+            return;
+        }
+    }
 }
 
-NTimerClass::~NTimerClass()
+NTimer::~NTimer()
 {
     free(events);
+    for (uint8_t instance = ZERO; instance < MAX_INSTANCES; instance++)
+    {
+        if (instances[instance] == this)
+        {
+            instances[instance] = ZERO;
+        }
+    }
 }
 
-bool NTimerClass::addEvent(evt newEvent)
+bool NTimer::addEvent(evt newEvent)
 {
     uint8_t index = search(newEvent.id);
     if (index < eventsLength)
@@ -48,7 +67,7 @@ bool NTimerClass::addEvent(evt newEvent)
     return true;
 }
 
-bool NTimerClass::changeEvent(evt event)
+bool NTimer::changeEvent(evt event)
 {
     uint8_t index = search(event.id);
     if (index < eventsLength)
@@ -60,7 +79,7 @@ bool NTimerClass::changeEvent(evt event)
     return false;
 }
 
-bool NTimerClass::removeEvent(uint8_t id)
+bool NTimer::removeEvent(uint8_t id)
 {
     uint8_t index = search(id);
     if (index < eventsLength)
@@ -80,7 +99,7 @@ bool NTimerClass::removeEvent(uint8_t id)
     return false;
 }
 
-uint8_t NTimerClass::search(uint8_t id)
+uint8_t NTimer::search(uint8_t id)
 {
     for (uint8_t i = ZERO; i < eventsLength; i++)
     {
@@ -90,9 +109,8 @@ uint8_t NTimerClass::search(uint8_t id)
     return eventsLength;
 }
 
-void NTimerClass::update()
+void NTimer::update()
 {
-    runtime = millis();
     if (!eventsLength)
         return;
     for (uint8_t i = ZERO; i < eventsLength; i++)
@@ -115,7 +133,7 @@ void NTimerClass::update()
     }
 }
 
-void NTimerClass::start()
+void NTimer::start()
 {
     for (uint8_t i = ZERO; i < eventsLength; i++)
     {
@@ -124,7 +142,7 @@ void NTimerClass::start()
     }
 }
 
-void NTimerClass::stop()
+void NTimer::stop()
 {
     for (uint8_t i = ZERO; i < eventsLength; i++)
     {
@@ -132,7 +150,7 @@ void NTimerClass::stop()
     }
 }
 
-bool NTimerClass::start(uint8_t id)
+bool NTimer::start(uint8_t id)
 {
     uint8_t index = search(id);
     if (index < eventsLength)
@@ -144,7 +162,7 @@ bool NTimerClass::start(uint8_t id)
     return false;
 }
 
-bool NTimerClass::startCall(uint8_t id)
+bool NTimer::startCall(uint8_t id)
 {
     uint8_t index = search(id);
     if (index < eventsLength)
@@ -157,7 +175,7 @@ bool NTimerClass::startCall(uint8_t id)
     return false;
 }
 
-bool NTimerClass::stop(uint8_t id)
+bool NTimer::stop(uint8_t id)
 {
     uint8_t index = search(id);
     if (index < eventsLength)
@@ -168,7 +186,7 @@ bool NTimerClass::stop(uint8_t id)
     return false;
 }
 
-pEvt NTimerClass::getEventSettings(uint8_t id)
+pEvt NTimer::getEventSettings(uint8_t id)
 {
     uint8_t index = search(id);
     if (index < eventsLength)
@@ -178,4 +196,24 @@ pEvt NTimerClass::getEventSettings(uint8_t id)
     return NULL;
 }
 
-NTimerClass NTimer = NTimerClass();
+void loop()
+{
+    runtime = millis();
+
+    if (instances[ZERO] == ZERO)
+    {
+        userLoop();
+        return;
+    }
+    else
+    {
+        instances[ZERO]->update();
+    }
+
+    for (uint8_t instance = 1; instance < MAX_INSTANCES; instance++)
+    {
+        if (instances[instance] != ZERO)
+            instances[instance]->update();
+    }
+    userLoop();
+}
