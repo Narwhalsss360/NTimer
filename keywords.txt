@@ -11,14 +11,13 @@ evt             	LITERAL1
 interval			KEYWORD2
 
 NTimerClass			KEYWORD1
-runtime				KEYWORD2
+runtime				KEYWORD1
 addEvent			KEYWORD2
 changeEvent			KEYWORD2
 removeEvent			KEYWORD2
 start				KEYWORD2
 startCall			KEYWORD2
 stop				KEYWORD2
-update				KEYWORD2
 
 PerfTimer			KEYWORD1
 startTime			KEYWORD2
