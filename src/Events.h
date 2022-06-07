@@ -34,6 +34,7 @@ struct Event
     bool enable;
     uint32_t time;
     uint8_t mode;
+    uint32_t iterations;
     uint32_t lastCallback;
     void (*callback)(ElapsedEvent);
     Event();
