@@ -20,6 +20,7 @@ inline bool interval(uint32_t &lastRun, uint32_t interval)
 NTimer::NTimer()
     : eventsLength(NULL), events(NULL)
 {
+    delete [] events;
     for (uint8_t instance = ZERO; instance < MAX_INSTANCES; instance++)
     {
         if (instances[instance] == ZERO)
@@ -200,11 +201,6 @@ pEvt NTimer::getEventSettings(uint8_t id)
         return &events[event];
     }
     return NULL;
-}
-
-NTimer::~NTimer()
-{
-    delete [] events;
 }
 
 void loop()
