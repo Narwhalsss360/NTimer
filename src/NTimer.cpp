@@ -44,8 +44,8 @@ NTimer::~NTimer()
 
 bool NTimer::addEvent(evt newEvent)
 {
-    uint8_t index = search(newEvent.id);
-    if (index < eventsLength)
+    uint8_t event = search(newEvent.id);
+    if (event < eventsLength)
     {
         changeEvent(newEvent);
         return false;
@@ -69,28 +69,28 @@ bool NTimer::addEvent(evt newEvent)
 
 bool NTimer::changeEvent(evt event)
 {
-    uint8_t index = search(event.id);
-    if (index < eventsLength)
+    uint8_t event = search(event.id);
+    if (event < eventsLength)
     {
-        if (events[index].enable)
+        if (events[event].enable)
             event.enable = true;
-        events[index] = event;
+        events[event] = event;
     }
     return false;
 }
 
 bool NTimer::removeEvent(uint8_t id)
 {
-    uint8_t index = search(id);
-    if (index < eventsLength)
+    uint8_t event = search(id);
+    if (event < eventsLength)
     {
         pEvt temp = new evt[eventsLength];
         memcpy(temp, events, sizeof(evt) * eventsLength);
         delete[] events;
         events = new evt[eventsLength - 1];
 
-        memmove(events, temp, (index + 1)*sizeof(evt));
-        memmove(events + index, temp + (index + 1), ((eventsLength - index)*sizeof(evt)));
+        memmove(events, temp, (event + 1)*sizeof(evt));
+        memmove(events + event, temp + (event + 1), ((eventsLength - event)*sizeof(evt)));
 
         delete[] temp;
         eventsLength--;
@@ -101,10 +101,10 @@ bool NTimer::removeEvent(uint8_t id)
 
 uint8_t NTimer::search(uint8_t id)
 {
-    for (uint8_t i = ZERO; i < eventsLength; i++)
+    for (uint8_t event = ZERO; event < eventsLength; event++)
     {
-        if (events[i].id == id)
-            return i;
+        if (events[event].id == id)
+            return event;
     }
     return eventsLength;
 }
@@ -136,28 +136,20 @@ void NTimer::update()
 
 void NTimer::start()
 {
-    for (uint8_t i = ZERO; i < eventsLength; i++)
+    for (uint8_t event = ZERO; event < eventsLength; event++)
     {
-        events[i].enable = true;
-        events[i].lastCallback = runtime;
-    }
-}
-
-void NTimer::stop()
-{
-    for (uint8_t i = ZERO; i < eventsLength; i++)
-    {
-        events[i].enable = false;
+        events[event].enable = true;
+        events[event].lastCallback = runtime;
     }
 }
 
 bool NTimer::start(uint8_t id)
 {
-    uint8_t index = search(id);
-    if (index < eventsLength)
+    uint8_t event = search(id);
+    if (event < eventsLength)
     {
-        events[index].enable = true;
-        events[index].lastCallback = runtime;
+        events[event].enable = true;
+        events[event].lastCallback = runtime;
         return true;
     }
     return false;
@@ -165,23 +157,36 @@ bool NTimer::start(uint8_t id)
 
 bool NTimer::startCall(uint8_t id)
 {
-    uint8_t index = search(id);
-    if (index < eventsLength)
+    uint8_t event = search(id);
+    if (event < eventsLength)
     {
-        events[index].enable = true;
-        events[index].callback({runtime, &events[index]});
-        events[index].lastCallback = runtime;
+        events[event].enable = true;
+        events[event].iterations++;
+        events[event].callback({runtime, &events[event]});
+        events[event].lastCallback = runtime;
         return true;
     }
     return false;
 }
 
-bool NTimer::stop(uint8_t id)
+void NTimer::stop(bool resetIterations = true)
 {
-    uint8_t index = search(id);
-    if (index < eventsLength)
+    for (uint8_t event = ZERO; event < eventsLength; event++)
     {
-        events[index].enable = false;
+        events[event].enable = false;
+        if (resetIterations)
+            events[index].iterations = ZERO;
+    }
+}
+
+bool NTimer::stop(uint8_t id, bool resetIterations = true)
+{
+    uint8_t event = search(id);
+    if (event < eventsLength)
+    {
+        events[event].enable = false;
+        if (resetIterations)
+            events[event].iterations = ZERO;
         return true;
     }
     return false;
@@ -189,10 +194,10 @@ bool NTimer::stop(uint8_t id)
 
 pEvt NTimer::getEventSettings(uint8_t id)
 {
-    uint8_t index = search(id);
-    if (index < eventsLength)
+    uint8_t event = search(id);
+    if (event < eventsLength)
     {
-        return &events[index];
+        return &events[event];
     }
     return NULL;
 }

@@ -34,8 +34,8 @@ public:
     void start();
     bool start(uint8_t);
     bool startCall(uint8_t);
-    void stop();
-    bool stop(uint8_t);
+    void stop(bool = true);
+    bool stop(uint8_t, bool = true);
     void update();
     pEvt getEventSettings(uint8_t);
     ~NTimer();
