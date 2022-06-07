@@ -212,8 +212,9 @@ void loop()
 
     for (uint8_t instance = 1; instance < MAX_INSTANCES; instance++)
     {
-        if (instances[instance] != ZERO)
-            instances[instance]->update();
+        if (instances[instance] == ZERO)
+            break;
+        instances[instance]->update();
     }
     userLoop();
 }
