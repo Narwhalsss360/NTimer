@@ -202,6 +202,11 @@ pEvt NTimer::getEventSettings(uint8_t id)
     return NULL;
 }
 
+NTimer::~NTimer()
+{
+    delete [] events;
+}
+
 void loop()
 {
     runtime = millis();
