@@ -176,7 +176,7 @@ void NTimer::stop(bool resetIterations = true)
     {
         events[event].enable = false;
         if (resetIterations)
-            events[index].iterations = ZERO;
+            events[event].iterations = ZERO;
     }
 }
 
