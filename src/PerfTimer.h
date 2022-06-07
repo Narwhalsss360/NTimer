@@ -23,5 +23,5 @@ public:
     PerfTimer(bool = true, unsigned long (*) (void) = millis);
 };
 
-
+typedef PerfTimer PT;
 #endif
