@@ -113,17 +113,18 @@ void NTimer::update()
 {
     if (!eventsLength)
         return;
-    for (uint8_t i = ZERO; i < eventsLength; i++)
+    for (uint8_t event = ZERO; event < eventsLength; event++)
     {
-        if (events[i].enable)
+        if (events[event].enable)
         {
-            if (interval(events[i].lastCallback, events[i].time))
+            if (interval(events[event].lastCallback, events[event].time))
             {
-                events[i].callback({runtime, &events[i]});
-                switch (events[i].mode)
+                events[event].iterations++;
+                events[event].callback({runtime, &events[event]});
+                switch (events[event].mode)
                 {
                 case ONCE:
-                    events[i].enable = false;
+                    events[event].enable = false;
                     break;
                 default:
                     break;
