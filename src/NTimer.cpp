@@ -106,8 +106,8 @@ void NTimer::update()
         {
             if (interval(events[event].lastCallback, events[event].time))
             {
-                events[event].iterations++;
                 events[event].callback({runtime, &events[event]});
+                events[event].iterations++;
                 switch (events[event].mode)
                 {
                 case ONCE:
@@ -148,8 +148,8 @@ bool NTimer::startCall(uint8_t id)
     if (event < eventsLength)
     {
         events[event].enable = true;
-        events[event].iterations++;
         events[event].callback({runtime, &events[event]});
+        events[event].iterations++;
         events[event].lastCallback = runtime;
         return true;
     }
