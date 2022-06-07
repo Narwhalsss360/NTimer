@@ -42,6 +42,7 @@ public:
 };
 
 extern void userLoop();
+void nonblockingDelay(uint32_t);
 
 #ifndef NTimer_cpp
 #define loop userLoop

@@ -188,6 +188,27 @@ pEvt NTimer::getEventSettings(uint8_t id)
     return NULL;
 }
 
+void nonblockingDelay(uint32_t ms)
+{
+    runtime = millis();
+    uint32_t start = runtime;
+    if (instance == ZERO)
+    {
+        delay(ms);
+        return;
+    }
+    while (true)
+    {
+        runtime = millis();
+        if (instance != ZERO)
+        {
+            instance->update();
+        }
+        if (runtime - start >= ms)
+            return;
+    }
+}
+
 void loop()
 {
     runtime = millis();
