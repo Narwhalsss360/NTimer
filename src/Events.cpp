@@ -16,11 +16,11 @@ Event::Event()
 }
 
 Event::Event(uint8_t _id, uint32_t _time, void (*cb)(ElapsedEvent))
-    : Event(_id, PERIODIC, _time, cb)
+    : id(_id), mode(PERIODIC), time(_time), callback(cb), lastCallback(millis()), enable(false), iterations(ZERO)
 {
 }
 
 Event::Event(uint8_t _id, uint8_t _mode, uint32_t _time, void (*cb)(ElapsedEvent))
-    : id(_id), mode(_mode),time(_time), callback(cb), lastCallback(millis()), enable(false), iterations(ZERO)
+    : id(_id), mode(_mode), time(_time), callback(cb), lastCallback(millis()), enable(false), iterations(ZERO)
 {
 }
