@@ -68,14 +68,14 @@ bool NTimer::addEvent(evt newEvent)
     return true;
 }
 
-bool NTimer::changeEvent(evt event)
+bool NTimer::changeEvent(evt newEvent)
 {
-    uint8_t event = search(event.id);
+    uint8_t event = search(newEvent.id);
     if (event < eventsLength)
     {
         if (events[event].enable)
-            event.enable = true;
-        events[event] = event;
+            newEvent.enable = true;
+        events[event] = newEvent;
     }
     return false;
 }
