@@ -2,7 +2,7 @@
 #include "NTimer.h"
 
 uint32_t runtime;
-static NTimer *instances[MAX_INSTANCES] = { ZERO };
+static NTimer *instance = ZERO;
 
 inline bool interval(uint32_t &lastRun, uint32_t interval)
 {
@@ -20,26 +20,13 @@ inline bool interval(uint32_t &lastRun, uint32_t interval)
 NTimer::NTimer()
     : eventsLength(NULL), events(NULL)
 {
-    for (uint8_t instance = ZERO; instance < MAX_INSTANCES; instance++)
-    {
-        if (instances[instance] == ZERO)
-        {
-            instances[instance] = this;
-            return;
-        }
-    }
+    instance = this;
 }
 
 NTimer::~NTimer()
 {
-    free(events);
-    for (uint8_t instance = ZERO; instance < MAX_INSTANCES; instance++)
-    {
-        if (instances[instance] == this)
-        {
-            instances[instance] = ZERO;
-        }
-    }
+    delete [] events;
+    instance = ZERO;
 }
 
 bool NTimer::addEvent(evt newEvent)
@@ -206,21 +193,9 @@ void loop()
 {
     runtime = millis();
 
-    if (instances[ZERO] == ZERO)
+    if (instance != ZERO)
     {
-        userLoop();
-        return;
-    }
-    else
-    {
-        instances[ZERO]->update();
-    }
-
-    for (uint8_t instance = 1; instance < MAX_INSTANCES; instance++)
-    {
-        if (instances[instance] == ZERO)
-            break;
-        instances[instance]->update();
+        instance->update();
     }
     userLoop();
 }
