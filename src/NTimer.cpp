@@ -156,13 +156,12 @@ bool NTimer::startCall(uint8_t id)
     return false;
 }
 
-void NTimer::stop(bool resetIterations = true)
+void NTimer::stop()
 {
     for (uint8_t event = ZERO; event < eventsLength; event++)
     {
         events[event].enable = false;
-        if (resetIterations)
-            events[event].iterations = ZERO;
+        events[event].iterations = ZERO;
     }
 }
 
