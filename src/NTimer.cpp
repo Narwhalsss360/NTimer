@@ -147,10 +147,10 @@ bool NTimer::startCall(uint8_t id)
     uint8_t event = search(id);
     if (event < eventsLength)
     {
+        events[event].lastCallback = runtime;
         events[event].enable = true;
         events[event].callback({runtime, &events[event]});
         events[event].iterations++;
-        events[event].lastCallback = runtime;
         return true;
     }
     return false;
