@@ -178,6 +178,28 @@ bool NTimer::stop(uint8_t id, bool resetIterations = true)
     return false;
 }
 
+bool NTimer::call(uint8_t id)
+{
+    uint8_t event = search(id);
+    if (event < eventsLength)
+    {
+        events[event].iterations++;
+        events[event].callback(ElapsedEvent({runtime, &events[event]}));
+        if (events[event].enable)
+            events[event].lastCallback = runtime;
+    }
+    return false;
+}
+
+void NTimer::forceCall(uint8_t id)
+{
+    uint8_t event = search(id);
+    if (event < eventsLength)
+    {
+        events[event].callback({runtime, &events[event]});
+    }
+}
+
 void NTimer::delay(uint32_t ms, uint16_t id = 256)
 {
     uint32_t start = runtime;

@@ -37,6 +37,8 @@ public:
     void stop();
     bool stop(uint8_t, bool = true);
     void update();
+    bool call(uint8_t);
+    void forceCall(uint8_t);
     void delay(uint32_t, uint16_t = 256);
     pEvt getEventSettings(uint8_t);
     ~NTimer();
