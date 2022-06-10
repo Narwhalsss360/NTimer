@@ -178,6 +178,40 @@ bool NTimer::stop(uint8_t id, bool resetIterations = true)
     return false;
 }
 
+void NTimer::delay(uint32_t ms, uint16_t id = 256)
+{
+    uint32_t start = runtime;
+    while (true)
+    {
+        for (uint8_t event = ZERO; event < eventsLength; event++)
+        {
+            runtime = millis();
+            if (runtime - start >= ms)
+                return;
+
+            if (events[event].id == id)
+                continue;
+
+            if (events[event].enable)
+            {
+                if (interval(events[event].lastCallback, events[event].time))
+                {
+                    events[event].callback({runtime, &events[event]});
+                    events[event].iterations++;
+                    switch (events[event].mode)
+                    {
+                    case ONCE:
+                        events[event].enable = false;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
 pEvt NTimer::getEventSettings(uint8_t id)
 {
     uint8_t event = search(id);
@@ -186,27 +220,6 @@ pEvt NTimer::getEventSettings(uint8_t id)
         return &events[event];
     }
     return NULL;
-}
-
-void nonblockingDelay(uint32_t ms)
-{
-    runtime = millis();
-    uint32_t start = runtime;
-    if (instance == ZERO)
-    {
-        delay(ms);
-        return;
-    }
-    while (true)
-    {
-        runtime = millis();
-        if (instance != ZERO)
-        {
-            instance->update();
-        }
-        if (runtime - start >= ms)
-            return;
-    }
 }
 
 void loop()

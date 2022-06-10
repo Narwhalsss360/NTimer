@@ -37,12 +37,12 @@ public:
     void stop();
     bool stop(uint8_t, bool = true);
     void update();
+    void delay(uint32_t, uint16_t = 256);
     pEvt getEventSettings(uint8_t);
     ~NTimer();
 };
 
 extern void userLoop();
-void nonblockingDelay(uint32_t);
 
 #ifndef NTimer_cpp
 #define loop userLoop
