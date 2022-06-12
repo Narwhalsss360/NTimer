@@ -20,13 +20,15 @@ inline bool interval(uint32_t &lastRun, uint32_t interval)
 NTimer::NTimer()
     : eventsLength(NULL), events(NULL)
 {
-    instance = this;
+    if (instance == NULL)
+        instance = this;
 }
 
 NTimer::~NTimer()
 {
     delete [] events;
-    instance = ZERO;
+    if (instance == this)
+        instance = ZERO;
 }
 
 bool NTimer::addEvent(evt newEvent)
