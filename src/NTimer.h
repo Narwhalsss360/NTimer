@@ -12,7 +12,7 @@
 #endif
 
 #include <NDefs.h>
-#include "Events.h"
+#include "NTimerEvents.h"
 #include "TimeLiterals.h"
 
 extern uint32_t runtime;

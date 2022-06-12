@@ -18,17 +18,17 @@ enum EVENTMODES
     PERIODIC
 };
 
-typedef struct Event;
+typedef struct NTimerEvent;
 
 struct ElapsedEvent
 {
     uint32_t signalTime;
-    Event *pEventSettings;
+    NTimerEvent *pEventSettings;
     ElapsedEvent();
-    ElapsedEvent(uint32_t, Event *);
+    ElapsedEvent(uint32_t, NTimerEvent *);
 };
 
-struct Event
+struct NTimerEvent
 {
     uint8_t id;
     bool enable;
@@ -37,12 +37,12 @@ struct Event
     uint32_t iterations;
     uint32_t lastCallback;
     void (*callback)(ElapsedEvent);
-    Event();
-    Event(uint8_t, uint32_t, void (*)(ElapsedEvent));
-    Event(uint8_t, uint8_t, uint32_t, void (*)(ElapsedEvent));
+    NTimerEvent();
+    NTimerEvent(uint8_t, uint32_t, void (*)(ElapsedEvent));
+    NTimerEvent(uint8_t, uint8_t, uint32_t, void (*)(ElapsedEvent));
 };
 
-typedef Event evt;
+typedef NTimerEvent evt;
 typedef evt &rEvt;
 typedef evt *pEvt;
 
