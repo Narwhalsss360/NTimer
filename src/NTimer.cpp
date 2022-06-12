@@ -246,6 +246,21 @@ pEvt NTimer::getEventSettings(uint8_t id)
     return NULL;
 }
 
+void NTimer::operator+=(evt newEvent)
+{
+    addEvent(newEvent);
+}
+
+void NTimer::operator-=(uint8_t id)
+{
+    removeEvent(id);
+}
+
+pEvt NTimer::operator<<(uint8_t id)
+{
+    return getEventSettings(id);
+}
+
 void loop()
 {
     runtime = millis();

@@ -45,6 +45,9 @@ public:
     void forceCall(uint8_t);
     void delay(uint32_t, uint16_t = 256);
     pEvt getEventSettings(uint8_t);
+    void operator+=(evt);
+    void operator-=(uint8_t);
+    pEvt operator<<(uint8_t);
     ~NTimer();
 };
 
