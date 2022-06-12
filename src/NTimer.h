@@ -12,6 +12,7 @@
 #endif
 
 #include <NDefs.h>
+#include "NTimerMacros.h"
 #include "NTimerEvents.h"
 #include "TimeLiterals.h"
 
