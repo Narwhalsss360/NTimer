@@ -19,6 +19,10 @@ extern uint32_t runtime;
 
 inline bool interval(uint32_t &, uint32_t);
 
+#ifdef NPush_h
+#warning Move NPush.h include BELOW NTimer.h for optimization.
+#endif
+
 class NTimer
 {
 private:
@@ -44,10 +48,10 @@ public:
     ~NTimer();
 };
 
-extern void userLoop();
+extern void NTimer_h_userLoop();
 
 #ifndef NTimer_cpp
-#define loop userLoop
+#define loop NTimer_h_userLoop
 #endif
 
 #endif
