@@ -114,6 +114,14 @@ void NTimer::update()
                 {
                 case ONCE:
                     events[event].enable = false;
+                    events[event].iterations = ZERO;
+                    break;
+                case ITERATION_COUNT:
+                    if (events[event].iterations == (events[event].maxIterations - 1))
+                    {
+                        events[event].enable = false;
+                        events[event].iterations = ZERO;
+                    }
                     break;
                 default:
                     break;

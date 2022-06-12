@@ -15,7 +15,8 @@
 enum EVENTMODES
 {
     ONCE,
-    PERIODIC
+    PERIODIC,
+    ITERATION_COUNT
 };
 
 typedef struct NTimerEvent;
@@ -35,11 +36,13 @@ struct NTimerEvent
     uint32_t time;
     uint8_t mode;
     uint32_t iterations;
+    uint32_t maxIterations;
     uint32_t lastCallback;
     void (*callback)(ElapsedEvent);
     NTimerEvent();
     NTimerEvent(uint8_t, uint32_t, void (*)(ElapsedEvent));
     NTimerEvent(uint8_t, uint8_t, uint32_t, void (*)(ElapsedEvent));
+    NTimerEvent(uint8_t, uint8_t, uint32_t, uint32_t, void (*)(ElapsedEvent));
 };
 
 typedef NTimerEvent evt;
