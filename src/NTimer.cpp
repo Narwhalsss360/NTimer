@@ -140,27 +140,18 @@ void NTimer::start()
     }
 }
 
-bool NTimer::start(uint8_t id)
+bool NTimer::start(uint8_t id, uint8_t call = ZERO)
 {
     uint8_t event = search(id);
     if (event < eventsLength)
     {
         events[event].enable = true;
         events[event].lastCallback = runtime;
-        return true;
-    }
-    return false;
-}
-
-bool NTimer::startCall(uint8_t id)
-{
-    uint8_t event = search(id);
-    if (event < eventsLength)
-    {
-        events[event].lastCallback = runtime;
-        events[event].enable = true;
-        events[event].callback({runtime, &events[event]});
-        events[event].iterations++;
+        if (call == CALL)
+        {
+            events[event].callback({runtime, &events[event]});
+            events[event].iterations++;
+        }
         return true;
     }
     return false;

@@ -37,8 +37,7 @@ public:
     bool changeEvent(evt);
     bool removeEvent(uint8_t);
     void start();
-    bool start(uint8_t);
-    bool startCall(uint8_t);
+    bool start(uint8_t, uint8_t = CALL);
     void stop();
     bool stop(uint8_t, bool = true);
     void update();
