@@ -13,13 +13,12 @@ struct PerfTimer
 {
 private:
     unsigned long (*timeFunction) (void);
-    bool running = false;
 public:
     uint32_t startTime = ZERO;
     uint32_t totalTime = ZERO;
 
     void start();
-    void stop();
+    uint32_t stop();
     PerfTimer(bool = true, unsigned long (*) (void) = millis);
 };
 
