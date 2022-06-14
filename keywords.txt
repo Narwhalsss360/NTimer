@@ -5,8 +5,13 @@ s               	LITERAL1
 m               	LITERAL1
 
 NTimerEvent     	LITERAL1
-ElapsedEvent    	LITERAL1
+INVALID_EVENT   	KEYWORD1
 evt             	LITERAL1
+
+ElapsedEvent    	LITERAL1
+INVALID_ELAPSED_EVENT	KEYWORD1
+
+
 
 interval			KEYWORD2
 
@@ -15,9 +20,18 @@ addEvent			KEYWORD2
 changeEvent			KEYWORD2
 removeEvent			KEYWORD2
 start				KEYWORD2
-startCall			KEYWORD2
+START       		LITERAL1
+forceCall   		KEYWORD2
 stop				KEYWORD2
+KEEP_ITERATION_COUNT	LITERAL1
+getEventSettings	KEYWORD2
 
 PerfTimer			KEYWORD1
 startTime			KEYWORD2
 totalTime			KEYWORD2
+
+LiteTimer   		KEYWORD1
+START       		LITERAL1
+enabled 			KEYWORD2
+lastTick			KEYWORD2
+tickInterval		KEYWORD2
