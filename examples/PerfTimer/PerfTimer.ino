@@ -1,5 +1,7 @@
 #include <PerfTimer.h>
 
+// PerfTimer has no safeties, worst case, totalTime is some crazy number.
+
 int baudrate = 9600;
 
 PerfTimer t1(false); //Dont start right away.
