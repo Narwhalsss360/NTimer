@@ -8,6 +8,7 @@
 #endif
 
 #include <NDefs.h>
+#include "NTimerMacros.h"
 
 struct PerfTimer
 {
