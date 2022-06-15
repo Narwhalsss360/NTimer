@@ -11,6 +11,18 @@
 #include "NTimerMacros.h"
 #include "TimeLiterals.h"
 
+#ifndef NTimer_h
+bool interval(uint32_t &last, uint32_t interval)
+{
+    if (millis() - last >= interval)
+    {
+        last = millis();
+        return true;
+    }
+    return false;
+}
+#endif
+
 #define START true
 
 class LiteTimer
