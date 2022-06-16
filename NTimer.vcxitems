@@ -27,7 +27,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)src\Events.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\TimeLiterals.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)examples\BasicBlink\BasicBlink.ino" />
+    <None Include="$(MSBuildThisFileDirectory)examples\EEPROMSave\EEPROMSave.ino" />
+    <None Include="$(MSBuildThisFileDirectory)examples\LiteTimer\LiteTimer.ino" />
+    <None Include="$(MSBuildThisFileDirectory)examples\Multiple\Multiple.ino" />
+    <None Include="$(MSBuildThisFileDirectory)examples\PerfTimer\PerfTimer.ino" />
   </ItemGroup>
 </Project>

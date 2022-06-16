@@ -12,11 +12,11 @@
     <Filter Include="Library metdata">
       <UniqueIdentifier>{1923a6ad-67b2-477d-8eb6-366416e3b489}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{dc130d95-f717-46c2-9b11-83e86de25039}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)src\Events.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\TimeLiterals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,5 +48,22 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\NTimerMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)examples\BasicBlink\BasicBlink.ino">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)examples\EEPROMSave\EEPROMSave.ino">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)examples\LiteTimer\LiteTimer.ino">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)examples\Multiple\Multiple.ino">
+      <Filter>Examples</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)examples\PerfTimer\PerfTimer.ino">
+      <Filter>Examples</Filter>
+    </None>
   </ItemGroup>
 </Project>
