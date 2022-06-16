@@ -30,6 +30,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)src\TimeLiterals.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\NHC-SR04\README.md" />
     <None Include="$(MSBuildThisFileDirectory)examples\BasicBlink\BasicBlink.ino" />
     <None Include="$(MSBuildThisFileDirectory)examples\EEPROMSave\EEPROMSave.ino" />
     <None Include="$(MSBuildThisFileDirectory)examples\LiteTimer\LiteTimer.ino" />
