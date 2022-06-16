@@ -42,8 +42,6 @@ struct NTimerEvent
     NTimerEvent(uint8_t, uint8_t, uint32_t, uint32_t, void (*)(ElapsedEvent));
 };
 
-typedef NTimerEvent evt;
-typedef evt &rEvt;
-typedef evt *pEvt;
+typedef NTimerEvent ntevt;
 
 #endif

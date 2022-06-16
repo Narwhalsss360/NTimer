@@ -12,15 +12,18 @@
 #include "TimeLiterals.h"
 
 #ifndef NTimer_h
-bool interval(uint32_t &last, uint32_t interval)
+#define time millis()
+bool interval(uint32_t &last, uint32_t period)
 {
-    if (millis() - last >= interval)
+    if (millis() - last >= period)
     {
         last = millis();
         return true;
     }
     return false;
 }
+#else
+#define time UC_UPTIME_NAME
 #endif
 
 #define START true
@@ -32,11 +35,39 @@ public:
     uint32_t lastTick;
     uint32_t tickInterval;
 
-    LiteTimer(uint32_t = ZERO, bool = true);
-    void start();
-    void stop();
-    operator bool();
-    ~LiteTimer();
+    LiteTimer(uint32_t newInterval = ZERO, bool startState = true)
+        : enabled(startState), lastTick(time), tickInterval(newInterval)
+    {
+
+    }
+
+    void start()
+    {
+        lastTick = time;
+        enabled = true;
+    }
+
+    bool tick()
+    {
+        return interval(lastTick, tickInterval);
+    }
+
+    void stop()
+    {
+        enabled = false;
+    }
+
+    operator bool()
+    {
+        return tick();
+    }
+
+    ~LiteTimer()
+    {
+        
+    }
 };
+
+#undef time
 
 #endif

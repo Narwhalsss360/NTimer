@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)NTimer.h" /> -->
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\Events.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\LiteTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\NTimerEvents.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\NTimerMacros.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\PerfTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Events.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)src\NTimer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\TimeLiterals.cpp" />
   </ItemGroup>
 </Project>
