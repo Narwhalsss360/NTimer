@@ -11,7 +11,7 @@ int sensorPin = A1;
 int sensorInterval = 5m;
 int sensorMode = PERIODIC;
 int sensorEventId = 0;
-Event sensorEvent;
+NTimerEvent sensorEvent;
 
 int memCounter = 0;
 
@@ -62,9 +62,9 @@ void setup()
     }
     Serial.end(); //End Serial if not connected at startup.
 
-    sensorEvent = Event(sensorEventId, sensorMode, sensorInterval, save); //Set event.
+    sensorEvent = NTimerEvent(sensorEventId, sensorMode, sensorInterval, save); //Set event.
     timer.addEvent(sensorEvent); //Register event.
-    timer.startCall(sensorEventId); //Start timer and call at start.
+    timer.start(sensorEventId, CALL); //Start timer and call at start.
 }
 
 void loop()
