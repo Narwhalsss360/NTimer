@@ -16,18 +16,6 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)keywords.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-    <Text Include="$(MSBuildThisFileDirectory)src\NTimer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)NTimer.h" /> -->
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\LiteTimer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\NTimerEvents.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\NTimerMacros.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\PerfTimer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)src\TimeLiterals.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)..\NHC-SR04\README.md" />
@@ -36,5 +24,18 @@
     <None Include="$(MSBuildThisFileDirectory)examples\LiteTimer\LiteTimer.ino" />
     <None Include="$(MSBuildThisFileDirectory)examples\Multiple\Multiple.ino" />
     <None Include="$(MSBuildThisFileDirectory)examples\PerfTimer\PerfTimer.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\NTimer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\TimedEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\TimedInterval.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeLiterals.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\TimeTypes.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Uptime.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\IntervalElapsed.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\TimedEvent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Uptime.cpp" />
   </ItemGroup>
 </Project>
