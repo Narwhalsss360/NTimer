@@ -15,7 +15,6 @@ struct ElapsedEventArgs
     bool enabled;
 };
 
-
 class TimedEvent
 {
 public:
@@ -31,7 +30,7 @@ public:
 
     bool bound();
 
-    Event<TimedEvent> elapsed;
+    Event<TimedEvent, ElapsedEventArgs&> elapsed;
 
     bool autoReset;
 
@@ -43,7 +42,6 @@ private:
 
     ElapsedEventArgs elapsedArgs;
     time_t startAt;
-    VoidMemberVoid<TimedEvent> checkElapsedRouterCallable;
 };
 
 #endif

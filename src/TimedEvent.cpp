@@ -3,7 +3,7 @@
 #include "Uptime.h"
 
 TimedEvent::TimedEvent(time_t interval, bool autoReset)
-    : elapsed(Event<TimedEvent>()), autoReset(autoReset), elapsedArgs(ElapsedEventArgs()), interval(interval), startAt(0), checkElapsedRouterCallable(VoidMemberVoid<TimedEvent>(this, &TimedEvent::checkElapsedRouter))
+    : elapsed(Event<TimedEvent, ElapsedEventArgs&>()), autoReset(autoReset), elapsedArgs(ElapsedEventArgs()), interval(interval), startAt(0)
 {
 }
 
@@ -17,7 +17,7 @@ void TimedEvent::start()
     if (enabled())
         return;
     startAt = uptime();
-    addSketchBinding(bind_loop, &checkElapsedRouterCallable);
+    addSketchBinding(bind_loop, &invokable_get(this, &TimedEvent::checkElapsedRouter));
     elapsedArgs.enabled = true;
 }
 
@@ -25,7 +25,7 @@ void TimedEvent::stop()
 {
     if (!enabled())
         return;
-    removeSketchBinding(bind_loop, &checkElapsedRouterCallable);
+    removeSketchBinding(bind_loop, &invokable_get(this, &TimedEvent::checkElapsedRouter));
     elapsedArgs.enabled = false;
 }
 
@@ -36,7 +36,7 @@ bool TimedEvent::checkElapsed()
         elapsedArgs.elapsedTime = uptime();
         elapsedArgs.startTime = startAt;
         startAt = uptime();
-        elapsed(&elapsedArgs);
+        elapsed(elapsedArgs);
 
         if (!autoReset)
             stop();
