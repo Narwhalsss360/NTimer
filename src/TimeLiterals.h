@@ -3,48 +3,59 @@
 
 #include "TimeTypes.h"
 
-constexpr time_t operator"" hz(time_t hertz)
+static constexpr time_t::int_type operator"" hz(const time_t::int_type hertz)
 {
-    return 1000 / hertz;
+    return time_t::cycles_per_second / hertz;
 }
 
-constexpr time_t operator"" hz(const long double hertz)
+static constexpr time_t::int_type operator"" hz(const long double hertz)
 {
-    return 1000 / hertz;
+    return time_t::cycles_per_second / hertz;
 }
 
-constexpr time_t operator"" s(time_t seconds)
+static constexpr time_t::int_type operator"" ms(const time_t::int_type milliseconds)
 {
-    return seconds * 1000;
+    return milliseconds * time_t::cycles_per_second / 1000;
 }
 
-constexpr time_t operator"" s(const long double seconds)
+static constexpr time_t::int_type operator"" ms(const long double milliseconds)
 {
-    return seconds * 1000;
+    return milliseconds * time_t::cycles_per_second / 1000;
 }
 
-constexpr time_t operator"" m(time_t minutes)
+static constexpr time_t::int_type operator"" s(time_t::int_type seconds)
 {
-    return minutes * 1000 * 60;
+    return seconds * time_t::cycles_per_second;
 }
 
-constexpr time_t operator"" m(const long double minutes)
+static constexpr time_t::int_type operator"" s(const long double seconds)
 {
-    return minutes * 1000 * 60;
+    return seconds * time_t::cycles_per_second;
 }
 
-constexpr time_t operator"" h(time_t hours)
+static constexpr time_t::int_type operator"" m(time_t::int_type minutes)
 {
-    return hours * 1000 * 60 * 60;
+    return minutes * time_t::cycles_per_second * 60;
 }
 
-constexpr time_t operator"" h(const long double hours)
+static constexpr time_t::int_type operator"" m(const long double minutes)
 {
-    return hours * 1000 * 60 * 60;
+    return minutes * time_t::cycles_per_second * 60;
 }
 
-constexpr time_t operator"" t(const long double time)
+static constexpr time_t::int_type operator"" h(time_t::int_type hours)
 {
-    return (time_t)time;
+    return hours * time_t::cycles_per_second * 60 * 60;
 }
+
+static constexpr time_t::int_type operator"" h(const long double hours)
+{
+    return hours * time_t::cycles_per_second * 60 * 60;
+}
+
+static time_t operator"" t(const long double time)
+{
+    return time_t((time_t::int_type)time);
+}
+
 #endif

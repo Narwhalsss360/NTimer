@@ -31,11 +31,11 @@ void TimedEvent::stop()
 
 bool TimedEvent::checkElapsed()
 {
-    if (enabled() && uptime() - startAt >= interval)
+    elapsedArgs.elapsedTime = uptime();
+    if (enabled() && elapsedArgs.elapsedTime - startAt >= interval)
     {
-        elapsedArgs.elapsedTime = uptime();
         elapsedArgs.startTime = startAt;
-        startAt = uptime();
+        startAt = elapsedArgs.elapsedTime;
         elapsed(elapsedArgs);
 
         if (!autoReset)

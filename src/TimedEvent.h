@@ -18,22 +18,36 @@ struct ElapsedEventArgs
 class TimedEvent
 {
 public:
-    TimedEvent(time_t = 0, bool = false);
+    /// @brief Class for timing events.
+    /// @param interval interval
+    /// @param autoReset re-enable timer after it has elapsed.
+    TimedEvent(time_t interval = 0, bool autoReset = false);
 
+    /// @brief Check if timer is running.
+    /// @return `bool` true if running
     bool enabled();
 
+    /// @brief Start the timer.
     void start();
 
+    /// @brief Stop the timer.
     void stop();
 
+    /// @brief Checks if the timer should have elapsed. invokes `elapsed` event.
+    /// @return `bool` true if elapsed
     bool checkElapsed();
 
+    /// @brief Check if the timer was successfully bound to the loop.
+    /// @return `true` if bound
     bool bound();
 
+    /// @brief Event invoked when timer elapsed.
     Event<TimedEvent, ElapsedEventArgs&> elapsed;
 
+    /// @brief Re-enables timer after elapsed if set to `true`.
     bool autoReset;
 
+    /// @brief interval of timer.
     time_t interval;
 
     ~TimedEvent();

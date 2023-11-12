@@ -1,37 +1,30 @@
 NTimer          	LITERAL1
 
+time_t              LITERAL1
+
+uptime              KEYWORD2
+
+intervalElapsed     KEYWORD2
+
+
 hz              	LITERAL1
 s               	LITERAL1
 m               	LITERAL1
+h                   LITERAL1
+t                   LITERAL1
 
-NTimerEvent     	LITERAL1
-INVALID_EVENT   	KEYWORD1
-evt             	LITERAL1
+ElapsedEventArgs    LITERAL1
+sender              KEYWORD2
+startTime           KEYWORD2
+elapsedTime         KEYWORD2
+enabled             KEYWORD2
 
-ElapsedEvent    	LITERAL1
-INVALID_ELAPSED_EVENT	KEYWORD1
-
-
-
-interval			KEYWORD2
-
-runtime          	KEYWORD1
-addEvent			KEYWORD2
-changeEvent			KEYWORD2
-removeEvent			KEYWORD2
-start				KEYWORD2
-START       		LITERAL1
-forceCall   		KEYWORD2
-stop				KEYWORD2
-KEEP_ITERATION_COUNT	LITERAL1
-getEventSettings	KEYWORD2
-
-PerfTimer			KEYWORD1
-startTime			KEYWORD2
-totalTime			KEYWORD2
-
-LiteTimer   		KEYWORD1
-START       		LITERAL1
-enabled 			KEYWORD2
-lastTick			KEYWORD2
-tickInterval		KEYWORD2
+TimedEvent          KEYWORD1
+enabled             KEYWORD2
+start               KEYWORD2
+stop                KEYWORD2
+checkElapsed        KEYWORD2
+bound               KEYWORD2
+elapsed             KEYWORD2
+autoReset           KEYWORD2
+interval            KEYWORD2
