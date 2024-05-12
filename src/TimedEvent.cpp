@@ -1,8 +1,21 @@
 #include "TimedEvent.h"
-#include "SketchBoundLibrary.h"
+#include <stdcol.h>
 #include "Uptime.h"
+#include <SketchBoundLibrary.h>
 
-TimedEvent::TimedEvent(time_t interval, bool autoReset)
+stdcol::dynamic_array<TimedEvent*> active;
+
+void timers()
+{
+    for (TimedEvent*& timer : active)
+    {
+        timer->checkElapsed();
+    }
+}
+
+bool TIMERS_BOUND = addSketchBinding(bind_loop, &invokable_get(timers));
+
+TimedEvent::TimedEvent(ntime_t interval, bool autoReset)
     : elapsed(Event<TimedEvent, ElapsedEventArgs&>()), autoReset(autoReset), elapsedArgs(ElapsedEventArgs()), interval(interval), startAt(0)
 {
 }
@@ -16,16 +29,21 @@ void TimedEvent::start()
 {
     if (enabled())
         return;
-    startAt = uptime();
-    addSketchBinding(bind_loop, &invokable_get(this, &TimedEvent::checkElapsedRouter));
+    if (!active.insert(active.size(), this))
+        return;
+
     elapsedArgs.enabled = true;
+    startAt = uptime();
 }
 
 void TimedEvent::stop()
 {
     if (!enabled())
         return;
-    removeSketchBinding(bind_loop, &invokable_get(this, &TimedEvent::checkElapsedRouter));
+    for (int i = 0; i < active.size(); i++)
+        if (active[i] == this)
+            active.remove(i);
+
     elapsedArgs.enabled = false;
 }
 
@@ -43,11 +61,6 @@ bool TimedEvent::checkElapsed()
         return true;
     }
     return false;
-}
-
-void TimedEvent::checkElapsedRouter()
-{
-    checkElapsed();
 }
 
 TimedEvent::~TimedEvent()

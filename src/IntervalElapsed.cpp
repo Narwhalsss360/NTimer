@@ -1,7 +1,7 @@
 #include "TimedInterval.h"
 #include "Uptime.h"
 
-bool intervalElapsed(time_t& lastInterval, const time_t& interval)
+bool intervalElapsed(ntime_t& lastInterval, const ntime_t& interval)
 {
     if (uptime() - lastInterval >= interval)
     {

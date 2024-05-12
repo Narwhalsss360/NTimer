@@ -10,8 +10,8 @@ class TimedEvent;
 struct ElapsedEventArgs
 {
     TimedEvent* sender;
-    time_t startTime;
-    time_t elapsedTime;
+    ntime_t startTime;
+    ntime_t elapsedTime;
     bool enabled;
 };
 
@@ -21,7 +21,7 @@ public:
     /// @brief Class for timing events.
     /// @param interval interval
     /// @param autoReset re-enable timer after it has elapsed.
-    TimedEvent(time_t interval = 0, bool autoReset = false);
+    TimedEvent(ntime_t interval = 0, bool autoReset = false);
 
     /// @brief Check if timer is running.
     /// @return `bool` true if running
@@ -48,14 +48,16 @@ public:
     bool autoReset;
 
     /// @brief interval of timer.
-    time_t interval;
+    ntime_t interval;
 
     ~TimedEvent();
+
 private:
-    void checkElapsedRouter();
 
     ElapsedEventArgs elapsedArgs;
-    time_t startAt;
+    ntime_t startAt;
 };
+
+void timers();
 
 #endif

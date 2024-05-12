@@ -1,11 +1,12 @@
 #ifndef TimeTypes_h
 #define TimeTypes_h
 
+#include <Arduino.h>
 #include <WString.h>
 #include <Printable.h>
 
 /// @brief type used by NTimer for time.
-struct time_t : Printable
+struct ntime_t : Printable
 {
     using int_type = unsigned long long;
 
@@ -17,15 +18,21 @@ struct time_t : Printable
 
     int_type time;
 
-    time_t();
+    ntime_t();
 
-    time_t(const int_type& time);
+    ntime_t(const int_type& time);
+
+    constexpr ntime_t(int_type&& time)
+        : time(time)
+    {
+
+    }
 
     int_type milliseconds() const;
 
     int_type& operator=(const int_type& time);
 
-    time_t& operator=(const time_t& other);
+    ntime_t& operator=(const ntime_t& other);
 
     operator int_type&();
 

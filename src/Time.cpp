@@ -2,44 +2,44 @@
 #include <Print.h>
 #include <math.h>
 
-time_t::time_t()
+ntime_t::ntime_t()
     : time(0)
 {
 }
 
-time_t::time_t(const int_type& time)
+ntime_t::ntime_t(const int_type& time)
     : time(time)
 {
 }
 
-time_t::int_type time_t::milliseconds() const
+ntime_t::int_type ntime_t::milliseconds() const
 {
     return (time * 1000) / cycles_per_second; //Can't pre-process (1000 / cycles_per_second), results in decimal
 }
 
-time_t::int_type& time_t::operator=(const int_type& time)
+ntime_t::int_type& ntime_t::operator=(const int_type& time)
 {
     this->time = time;
     return this->time;
 }
 
-time_t& time_t::operator=(const time_t& other)
+ntime_t& ntime_t::operator=(const ntime_t& other)
 {
     time = other.time;
     return *this;
 }
 
-time_t::operator time_t::int_type&()
+ntime_t::operator ntime_t::int_type&()
 {
     return time;
 }
 
-time_t::operator const time_t::int_type&() const
+ntime_t::operator const ntime_t::int_type&() const
 {
     return time;
 }
 
-String time_t::toString() const
+String ntime_t::toString() const
 {
     int_type copy = time;
     int16_t length = log10(copy) + 1;
@@ -55,7 +55,7 @@ String time_t::toString() const
     return result;
 }
 
-size_t time_t::printTo(Print& print) const
+size_t ntime_t::printTo(Print& print) const
 {
     return print.print(toString());
 }

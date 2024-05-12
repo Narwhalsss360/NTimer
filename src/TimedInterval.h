@@ -7,6 +7,6 @@
 /// @param lastInterval last time interval elapsed
 /// @param interval interval
 /// @return `bool` true if elapsed
-bool intervalElapsed(time_t& lastInterval, const time_t& interval);
+bool intervalElapsed(ntime_t& lastInterval, const ntime_t& interval);
 
 #endif
