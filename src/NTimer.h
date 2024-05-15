@@ -6,5 +6,6 @@
 #include "TimedInterval.h"
 #include "TimeLiterals.h"
 #include "TimedEvent.h"
+#include "DelayAsync.h"
 
 #endif
