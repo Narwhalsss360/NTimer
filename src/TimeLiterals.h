@@ -53,9 +53,4 @@ static constexpr ntime_t::int_type operator"" _h(const long double hours)
     return hours * ntime_t::cycles_per_second * 60 * 60;
 }
 
-static ntime_t operator"" _t(const long double time)
-{
-    return ntime_t((ntime_t::int_type)time);
-}
-
 #endif

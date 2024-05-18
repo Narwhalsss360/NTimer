@@ -58,6 +58,6 @@ private:
     ntime_t startAt;
 };
 
-void timers();
+void checkTimedEvents();
 
 #endif

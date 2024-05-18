@@ -5,7 +5,7 @@
 
 stdcol::dynamic_array<TimedEvent*> active;
 
-void timers()
+static void checkTimedEvents()
 {
     for (TimedEvent*& timer : active)
     {
@@ -13,7 +13,7 @@ void timers()
     }
 }
 
-bool TIMERS_BOUND = addSketchBinding(bind_loop, &invokable_get(timers));
+bool TIMERS_BOUND = addSketchBinding(bind_loop, &invokable_get(checkTimedEvents));
 
 TimedEvent::TimedEvent(ntime_t interval, bool autoReset)
     : elapsed(Event<TimedEvent, ElapsedEventArgs&>()), autoReset(autoReset), elapsedArgs(ElapsedEventArgs()), interval(interval), startAt(0)

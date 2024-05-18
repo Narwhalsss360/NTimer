@@ -1,72 +1,59 @@
+#include <AutoBind.h> //<- This library uses SketchBinder to automatically update anything that updates every loop
 #include <NTimer.h>
 #include <EEPROM.h>
 
-#define WAIT_FOR_SERIAL 1000
+#define SENSOR_PIN (A0)
+#define BAUDRATE (115200)
+#define SERIAL_WAIT_TIME 1250
 
-NTimer timer;
+constexpr const ntime_t::int_type SAVE_INTERVAL = 1_m; //Declarating constexpr for ntime_t
 
-int baudrate = 9600;
+uint16_t memoryUsed = 0;
 
-int sensorPin = A1;
-int sensorInterval = 5m;
-int sensorMode = PERIODIC;
-int sensorEventId = 0;
-NTimerEvent sensorEvent;
-
-int memCounter = 0;
-
-void clearEEPROM(byte fill) //Clears memory, fills memory with {fill} parameter.
+void clearEEPROM()
 {
     for (int i = 0; i < EEPROM.length(); i++)
     {
-        EEPROM.update(i, fill);
+        EEPROM.update(i, 0xFF);
     }
+}
+
+void save(ElapsedEventArgs& args)
+{
+    if (memoryUsed == EEPROM.length()) //Memory full
+        return;
+    EEPROM.update(memCounter, analogRead(SENSOR_PIN));
+    memoryUsed++;
 }
 
 void printValues()
 {
     for (int i = 0; i < EEPROM.length(); i++)
     {
-        Serial.print("Minute ");
-        Serial.print(i * 5);
-        Serial.print(": ");
+        Serial.print(i);
+        Serial.print(':');
         Serial.println(EEPROM.read(i));
     }
 }
 
-byte getSensorReading()
-{
-    return map(analogRead(sensorPin), 0, 1023, 0, 255); //Get sensor reading from 0 - 255.
-}
-
-void save(ElapsedEvent eventInfo)
-{
-    if (memCounter == EEPROM.length()) //If EEPROM is filled, dont add anymore.
-        return;
-    EEPROM.update(memCounter, getSensorReading()); //Add sensor reading.
-    memCounter++; //Count up.
-}
+TimedEvent saveEvent = TimedEvent(SAVE_INTERVAL, true); //Interval and auto reset
 
 void setup()
 {
-    Serial.begin(baudrate); //Start Serial.
-    delay(WAIT_FOR_SERIAL); //Wait a little.
-
-    if (Serial) //Execute block if Serial is connected at startup. Press reset button while connected.
+    Serial.begin(BAUDRATE);
+    delay(SERIAL_WAIT_TIME);
+    if (Serial)
     {
-        printValues(); //Print values on EEPROM.
-        clearEEPROM(0xff); //Clear after person checks.
-        while (1) //Dont continue.
-        {
-        }
+        printValues();
+        clearEEPROM();
+        while (true);
     }
-    Serial.end(); //End Serial if not connected at startup.
-
-    sensorEvent = NTimerEvent(sensorEventId, sensorMode, sensorInterval, save); //Set event.
-    timer.addEvent(sensorEvent); //Register event.
-    timer.start(sensorEventId, CALL); //Start timer and call at start.
+    Serial.end();
+    saveEvent.elapsed += save;
+    saveEvent.start();
 }
 
 void loop()
 {
+    //checkTimedEvents(); //If no AutoBind/SketchBinder, use this to check all timedevents
 }
