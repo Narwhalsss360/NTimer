@@ -5,7 +5,7 @@
 
 stdcol::dynamic_array<TimedEvent*> active;
 
-static void checkTimedEvents()
+void checkTimedEvents()
 {
     for (TimedEvent*& timer : active)
     {
