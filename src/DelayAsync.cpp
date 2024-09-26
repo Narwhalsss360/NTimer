@@ -20,8 +20,14 @@ AsynchronusDelayInfo* delayAsync(ntime_t delay, AsynchronusDelayInfoHandler hand
 void checkAsynchronusDelays()
 {
     for (stdcol::index i = 0; i < size(activeDelays); i++)
+    {
         if (activeDelays[i]->run())
+        {
             delete activeDelays[i];
+            activeDelays.remove(i);
+        }
+    }
+    activeDelays.reserve(size(activeDelays));
 }
 
 AsynchronusDelayInfo::AsynchronusDelayInfo(ntime_t delay, AsynchronusDelayInfoHandler handler, void* context)
