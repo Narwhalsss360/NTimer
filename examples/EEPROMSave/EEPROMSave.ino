@@ -20,19 +20,20 @@ void clearEEPROM()
 
 void save(ElapsedEventArgs& args)
 {
-    if (memoryUsed == EEPROM.length()) //Memory full
+    if (EEPROM.length() - memoryUsed >  sizeof(uint16_t)) //Memory full
         return;
-    EEPROM.update(memCounter, analogRead(SENSOR_PIN));
-    memoryUsed++;
+    uint16_t value = analogRead(SENSOR_PIN);
+    EEPROM.put(memoryUsed, value);
 }
 
 void printValues()
 {
-    for (int i = 0; i < EEPROM.length(); i++)
+    for (int i = 0; i < EEPROM.length(); i += sizeof(uint16_t))
     {
         Serial.print(i);
         Serial.print(':');
-        Serial.println(EEPROM.read(i));
+        uint16_t value;
+        Serial.println(EEPROM.get<uint16_t>(i, value));
     }
 }
 
@@ -55,5 +56,6 @@ void setup()
 
 void loop()
 {
-    //checkTimedEvents(); //If no AutoBind/SketchBinder, use this to check all timedevents
+    //checkTimedEvents(); //If no AutoBind/SketchBinder, use this to check all TimedEvents.
+    //You may check checkTimedEvents_Bound global bool variable
 }

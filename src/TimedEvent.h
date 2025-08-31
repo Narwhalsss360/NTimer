@@ -60,4 +60,6 @@ private:
 
 void checkTimedEvents();
 
+extern const bool checkTimedEvents_Bound;
+
 #endif

@@ -41,18 +41,13 @@ ntime_t::operator const ntime_t::int_type&() const
 
 String ntime_t::toString() const
 {
+    String str = String();
     int_type copy = time;
-    int16_t length = log10(copy) + 1;
-    char* str = new char[length + 1];
-    str[length] = '\0';
-    for (length -= 1; length >= 0; length--)
-    {
-        str[length] = '0' + (copy % 10);
+    while (copy > 0) {
+        str.concat(static_cast<char>('0' + (copy % 10)));
         copy /= 10;
     }
-    String result = String(str);
-    delete[] str;
-    return result;
+    return str;
 }
 
 size_t ntime_t::printTo(Print& print) const
