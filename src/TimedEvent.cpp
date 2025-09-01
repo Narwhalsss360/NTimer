@@ -14,7 +14,8 @@ TimedEvent* active[MAX_ACTIVE] = { nullptr };
 void checkTimedEvents()
 {
     for (TimedEvent*& timer : active)
-        timer->checkElapsed();
+        if (timer != nullptr)
+            timer->checkElapsed();
 }
 
 #ifdef TimedEvent_Bindable
